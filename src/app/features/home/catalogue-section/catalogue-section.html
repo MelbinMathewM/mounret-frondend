@@ -1,0 +1,126 @@
+<section class="bg-gray-600 text-white grid grid-cols-1 lg:grid-cols-3">
+
+  <!-- LEFT IMAGE -->
+  <div class="hidden lg:block">
+    <img src="assets/images/interior-design-book-cover.png"
+         class="w-full h-full object-cover">
+  </div>
+
+
+  <!-- FORM -->
+  <div class="p-10 md:p-16">
+
+    <h2 class="text-center text-xl md:text-2xl tracking-[4px] mb-8 font-light">
+      THE ULTIMATE INSPIRATIONS DESIGN BOOK
+    </h2>
+
+    <form [formGroup]="catalogueForm" (ngSubmit)="submitForm()" class="space-y-4">
+
+      <div class="flex gap-6 text-sm">
+
+        <label class="flex items-center gap-2">
+          <input type="radio" value="Professional" formControlName="profileType">
+          Professional
+        </label>
+
+        <label class="flex items-center gap-2">
+          <input type="radio" value="Private Client" formControlName="profileType">
+          Private Client
+        </label>
+
+      </div>
+
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <input type="text"
+               placeholder="FIRST NAME*"
+               formControlName="firstName"
+               class="p-3 text-black">
+
+        <input type="text"
+               placeholder="LAST NAME*"
+               formControlName="lastName"
+               class="p-3 text-black">
+
+      </div>
+
+
+      <input type="email"
+             placeholder="EMAIL*"
+             formControlName="email"
+             class="w-full p-3 text-black">
+
+      <input type="text"
+             placeholder="SELECT INDUSTRY"
+             formControlName="industry"
+             class="w-full p-3 text-black">
+
+      <input type="text"
+             placeholder="COMPANY*"
+             formControlName="company"
+             class="w-full p-3 text-black">
+
+      <input type="text"
+             placeholder="WEBSITE*"
+             formControlName="website"
+             class="w-full p-3 text-black">
+
+
+      <div *ngIf="submitted && catalogueForm.invalid"
+           class="text-red-200 text-sm">
+        Please fill all required fields correctly
+      </div>
+
+
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-6">
+
+        <p class="text-xs text-gray-200 max-w-[400px]">
+          By clicking request you confirm that you have read and accepted our privacy policy.
+        </p>
+
+        <button
+          [disabled]="loading"
+          class="bg-gray-200 text-black px-6 py-3 tracking-widest text-xs hover:bg-white transition">
+
+          {{loading ? 'Submitting...' : 'DOWNLOAD NOW'}}
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- RIGHT PROMO -->
+  <div class="bg-neutral-900 flex items-center justify-center p-10">
+
+    <div class="text-center space-y-4">
+
+      <div>
+        <h3 class="text-lg tracking-widest">
+          {{catalogue?.brand}}
+        </h3>
+        <p class="text-sm tracking-widest">
+          CATALOGUE
+        </p>
+      </div>
+
+      <img [src]="catalogue?.image"
+           class="w-40 mx-auto">
+
+      <button
+        (click)="downloadCatalogue()"
+        class="bg-gray-200 text-black px-6 py-3 tracking-widest text-xs hover:bg-white transition">
+
+        DOWNLOAD NOW
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

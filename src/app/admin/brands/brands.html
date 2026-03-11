@@ -1,0 +1,106 @@
+<div class="bg-white p-6 rounded shadow">
+
+  <div class="flex justify-between mb-4">
+
+    <h2 class="text-lg font-semibold">Brands</h2>
+
+    <button (click)="openAdd()" class="bg-black text-white px-4 py-2 rounded text-sm">
+      Add Brand
+    </button>
+
+  </div>
+
+
+  <!-- ADD / EDIT FORM -->
+
+  <div *ngIf="showForm" class="mb-6 border p-4 rounded">
+
+    <h3 class="font-semibold mb-4">
+      {{editing ? 'Edit Brand' : 'Add Brand'}}
+    </h3>
+
+    <div class="space-y-4">
+
+      <!-- BRAND NAME -->
+
+      <input
+        type="text"
+        placeholder="Brand Name"
+        [(ngModel)]="form.name"
+        class="w-full border p-2 rounded"
+      />
+
+      <!-- IMAGE UPLOAD -->
+
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        class="w-full border p-2 rounded"
+      />
+
+      <!-- IMAGE PREVIEW -->
+
+      <img
+        *ngIf="preview"
+        [src]="preview"
+        class="h-20 rounded border"
+      />
+
+      <div class="flex gap-3">
+
+        <button (click)="save()" class="bg-green-600 text-white px-4 py-2 rounded">
+          Save
+        </button>
+
+        <button (click)="cancel()" class="bg-gray-400 text-white px-4 py-2 rounded">
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TABLE -->
+
+  <table class="w-full text-left">
+
+    <thead>
+      <tr class="border-b">
+        <th class="py-2">Image</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let b of brands" class="border-b">
+
+        <td class="py-2">
+          <img [src]="'http://localhost:5234' + b.image" class="h-12">
+        </td>
+
+        <td>{{b.name}}</td>
+
+        <td class="space-x-2">
+
+          <button (click)="edit(b)" class="text-blue-600">
+            Edit
+          </button>
+
+          <button (click)="delete(b.id)" class="text-red-600">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

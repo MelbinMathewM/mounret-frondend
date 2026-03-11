@@ -1,0 +1,83 @@
+<div class="bg-white p-6 rounded shadow">
+
+    <div class="flex justify-between mb-4">
+
+        <h2 class="text-lg font-semibold">Categories</h2>
+
+        <button (click)="openAdd()" class="bg-black text-white px-4 py-2 rounded text-sm">
+
+            Add Category
+
+        </button>
+
+    </div>
+
+    <!-- ADD / EDIT FORM -->
+
+    <div *ngIf="showForm" class="mb-6 border p-4 rounded">
+
+        <h3 class="font-semibold mb-4">
+            {{editing ? 'Edit Category' : 'Add Category'}}
+        </h3>
+
+        <div class="space-y-4">
+
+            <input type="text" placeholder="Category Name" [(ngModel)]="form.name" class="w-full border p-2 rounded" />
+
+            <textarea placeholder="Description" [(ngModel)]="form.description"
+                class="w-full border p-2 rounded"></textarea>
+
+            <div class="flex gap-3">
+
+                <button (click)="save()" class="bg-green-600 text-white px-4 py-2 rounded">
+
+                    Save
+
+                </button>
+
+                <button (click)="cancel()" class="bg-gray-400 text-white px-4 py-2 rounded">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <table class="w-full text-left">
+
+        <thead>
+            <tr class="border-b">
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let c of categories" class="flex justify-between border-b py-2">
+
+                <td>{{c.name}}</td>
+
+                <td class="space-x-2">
+
+                    <button (click)="edit(c)" class="text-blue-600">
+                        Edit
+                    </button>
+
+                    <button (click)="delete(c.id)" class="text-red-600">
+                        Delete
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,0 +1,103 @@
+<section class="relative h-screen w-full overflow-hidden">
+
+    <img src="assets/images/home4.jpg" class="absolute inset-0 w-full h-full object-cover">
+
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <div class="absolute bottom-20 w-full text-center text-white px-6">
+
+        <h1 class="text-3xl md:text-5xl lg:text-6xl tracking-[6px] font-light">
+            LUXURY INTERIORS
+        </h1>
+
+        <p class="mt-4 text-xs md:text-sm tracking-[4px] text-gray-200">
+            A CREATIVE JOURNEY THROUGH DESIGN
+        </p>
+
+        <button
+            class="mt-8 border border-white px-6 py-3 text-xs tracking-widest hover:bg-white hover:text-black transition">
+            VIEW MORE
+        </button>
+
+    </div>
+
+</section>
+
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 bg-black">
+
+    <div *ngFor="let category of categories" class="relative group h-[320px] md:h-[380px] overflow-hidden">
+
+        <img [src]="category.image"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition"></div>
+
+        <span class="absolute bottom-6 left-6 text-white text-xs tracking-[2px]">
+            {{category.name}}
+        </span>
+
+    </div>
+
+</section>
+
+<section class="relative h-[450px] md:h-[520px] flex items-center justify-center text-white overflow-hidden">
+
+    <!-- Parallax Background -->
+    <div class="absolute inset-0 bg-[url('/assets/images/feature-bg.jpg')] bg-cover bg-center bg-fixed">
+    </div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <!-- Content -->
+    <p class="relative text-center tracking-[4px]">
+
+        <span class="text-sm md:text-lg font-light">
+            THE MOST POWERFUL TOOL
+        </span>
+
+        <br>
+
+        <span class="text-2xl md:text-4xl font-semibold">
+            TO INSPIRE
+        </span>
+
+        <span class="text-sm md:text-lg font-light">
+            CREATIVITY
+        </span>
+
+    </p>
+
+</section>
+
+<app-catalogue-section></app-catalogue-section>
+
+<section class="bg-black py-4 text-center text-white overflow-hidden">
+
+    <h2 class="tracking-[4px] text-lg mb-4">
+        OUR BRANDS
+    </h2>
+
+    <div class="relative overflow-hidden">
+
+        <div class="flex gap-6 w-max animate-brandScroll hover:[animation-play-state:paused]">
+
+            <!-- ORIGINAL -->
+            <div *ngFor="let brand of brands"
+                class="min-w-[300px] md:min-w-[420px] lg:min-w-[520px] h-[200px] md:h-[260px] overflow-hidden">
+                <img [src]="brand.image"
+                    class="w-full h-full object-cover rounded-sm hover:scale-105 transition duration-500" />
+            </div>
+
+            <!-- DUPLICATE FOR LOOP -->
+            <div *ngFor="let brand of brands"
+                class="min-w-[300px] md:min-w-[420px] lg:min-w-[520px] h-[200px] md:h-[260px] overflow-hidden">
+                <img [src]="brand.image"
+                    class="w-full h-full object-cover rounded-sm hover:scale-105 transition duration-500" />
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
