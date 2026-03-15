@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrandsService } from '../services/brands';
@@ -24,7 +24,10 @@ export class Brands implements OnInit {
     name: ''
   };
 
-  constructor(private service: BrandsService) {}
+  constructor(
+    private service: BrandsService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.load();
@@ -33,6 +36,7 @@ export class Brands implements OnInit {
   load() {
     this.service.getAll().subscribe((res: any) => {
       this.brands = res;
+      this.cdr.detectChanges()
     });
   }
 

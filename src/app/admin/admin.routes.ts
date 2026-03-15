@@ -1,19 +1,39 @@
 import { Routes } from '@angular/router';
 
-import { Dashboard } from './dashboard/dashboard';
-import { Categories } from './categories/categories';
-import { Brands } from './brands/brands';
-import { Products } from './products/products';
-import { Offers } from './offers/offers';
-import { Orders } from './orders/orders';
-
 export const adminRoutes: Routes = [
 
-  { path: '', component: Dashboard },
-  { path: 'categories', component: Categories },
-  { path: 'brands', component: Brands },
-  { path: 'products', component: Products },
-  { path: 'offers', component: Offers },
-  { path: 'orders', component: Orders },
+  {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./dashboard/dashboard')
+      .then(m => m.Dashboard)
+  },
+
+  {
+    path: 'categories',
+    loadComponent: () =>
+      import('./categories/categories')
+      .then(m => m.Categories)
+  },
+
+  {
+    path: 'brands',
+    loadComponent: () =>
+      import('./brands/brands')
+      .then(m => m.Brands)
+  },
+
+  {
+    path: 'products',
+    loadComponent: () =>
+      import('./products/products')
+      .then(m => m.Products)
+  },
+
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  }
 
 ];

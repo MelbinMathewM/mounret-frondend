@@ -1,0 +1,27 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <div class="bg-white p-8 rounded shadow w-full max-w-sm">
+
+        <h2 class="text-xl font-semibold mb-6 text-center">
+            Admin Login
+        </h2>
+
+        <div class="space-y-4">
+
+            <input type="email" placeholder="Email" [(ngModel)]="email" class="w-full border p-2 rounded" />
+
+            <input type="password" placeholder="Password" [(ngModel)]="password" class="w-full border p-2 rounded" />
+
+            <button (click)="login()" class="w-full bg-black text-white py-2 rounded">
+                {{loading ? 'Logging in...' : 'Login'}}
+            </button>
+
+            <p *ngIf="error" class="text-red-500 text-sm text-center">
+                {{error}}
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
