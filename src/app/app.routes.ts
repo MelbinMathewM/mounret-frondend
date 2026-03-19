@@ -5,6 +5,7 @@ import { AdminLayout } from './admin/layout/admin-layout';
 import { adminRoutes } from './admin/admin.routes';
 import { AdminGuard } from './admin/auth/guards/admin.guard';
 import { ProductList } from './features/products/product-list/product-list';
+import { ProductDetail } from './features/products/product-details/product-details';
 
 export const routes: Routes = [
 
@@ -14,6 +15,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: Home },
       { path: 'products', component: ProductList },
+      { path: 'products/:id', component: ProductDetail },
     ]
   },
 

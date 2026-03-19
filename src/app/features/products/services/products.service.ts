@@ -18,4 +18,15 @@ export class ProductsService {
 
     }
 
+    getById(id: number) {
+        return this.http.get(`http://localhost:5234/api/products/${id}`)
+    }
+
+    sendEnquiry(data: any) {
+        return this.http.post(
+            'http://localhost:5234/api/enquiries',
+            data
+        )
+    }
+
 }

@@ -1,0 +1,244 @@
+<div *ngIf="product" class="max-w-7xl mx-auto px-10 py-16 grid grid-cols-1 lg:grid-cols-3 gap-16 mt-10">
+
+    <!-- 🖼 LEFT SIDE (2 columns) -->
+    <div class="flex gap-6 lg:gap-24 lg:col-span-2">
+
+        <!-- Thumbnails -->
+        <div class="flex flex-col gap-4 w-24">
+            <img *ngFor="let img of images" [src]="img" (click)="selectedImage = img"
+                class="w-full h-24 object-cover cursor-pointer border border-gray-200 hover:border-black transition" />
+        </div>
+
+        <!-- Main Image -->
+        <div class="flex-1 m-auto">
+            <img [src]="selectedImage" class="w-100 h-[450px] object-cover" />
+        </div>
+
+    </div>
+
+    <!-- 📄 RIGHT SIDE (1 column) -->
+    <div class="w-full lg:col-span-1">
+
+        <!-- Breadcrumb -->
+        <p class="text-xs tracking-widest text-gray-400 uppercase">
+            HOME / SEATING / SOFAS
+        </p>
+
+        <h1 class="text-xl tracking-[0.2em] mt-4 font-light">
+            {{product.name}}
+        </h1>
+
+        <p class="text-sm text-gray-500 mt-1 tracking-wider">
+            {{product.brandName}}
+        </p>
+
+        <div class="border-b mt-4"></div>
+
+        <p class="text-green-600 text-sm mt-4 flex items-center gap-2">
+            ● <span class="uppercase tracking-widest text-xs">In Stock</span>
+        </p>
+
+        <!-- Qty + Button -->
+        <div class="flex items-center gap-4 mt-4">
+
+            <div class="flex border w-28 justify-between px-3 py-2">
+                <button (click)="qty = qty - 1">-</button>
+                <span>{{qty}}</span>
+                <button (click)="qty = qty + 1">+</button>
+            </div>
+
+            <button (click)="openModal('price')"
+                class="bg-[#C5A46D] text-white px-12 py-3 text-xs tracking-[0.2em] hover:opacity-90">
+                GET PRICE
+            </button>
+
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-8 divide-y text-sm">
+
+            <div class="flex justify-between py-4 cursor-pointer" (click)="openModal('pdf')">
+                <span class="tracking-widest">PRODUCT SHEET PDF</span>
+                <span>›</span>
+            </div>
+
+            <div class="flex justify-between py-4 cursor-pointer" (click)="openModal('3d')">
+                <span class="tracking-widest">DOWNLOAD 3D / DWG FILES</span>
+                <span>›</span>
+            </div>
+
+            <div class="flex justify-between py-4 cursor-pointer" (click)="openModal('sample')">
+                <span class="tracking-widest">REQUEST SAMPLES</span>
+                <span>›</span>
+            </div>
+
+        </div>
+
+        <!-- DETAILS -->
+        <div class="mt-8 text-sm text-gray-600 leading-7">
+
+            <p class="uppercase tracking-widest text-xs text-black">
+                DIMENSIONS
+            </p>
+            <p class="mt-1">
+                {{product.dimensions || 'Width: 226 CM | Depth: 96 CM | Height: 67 CM'}}
+            </p>
+
+            <p class="uppercase tracking-widest text-xs text-black mt-4">
+                MATERIALS AND FINISHES
+            </p>
+            <p class="mt-1">
+                {{product.materials || 'Brass, Leather, Metal'}}
+            </p>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-10 space-y-3">
+
+            <button class="w-full bg-gray-400 text-black py-3 tracking-widest text-xs">
+                TALK WITH A PRODUCT SPECIALIST
+            </button>
+
+            <button class="w-full bg-gray-300 text-black py-3 tracking-widest text-xs">
+                REQUEST CUSTOMIZATION
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div *ngIf="activeModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+
+    <div class="bg-white w-full max-w-2xl p-10 relative">
+
+        <button (click)="closeModal()" class="absolute top-4 right-4 text-lg">
+            ×
+        </button>
+
+        <h2 class="text-center tracking-[0.3em] text-lg mb-6">
+            PRODUCT SHEET PDF
+        </h2>
+
+        <!-- RADIO -->
+        <div class="flex items-center gap-6 justify-center mb-6 text-sm">
+
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="userType" value="private" [(ngModel)]="form.userType" class="accent-black" />
+                <span>Private</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="userType" value="professional" [(ngModel)]="form.userType" class="accent-black" />
+                <span>Professional</span>
+            </label>
+
+        </div>
+
+        <div class="space-y-5">
+
+            <div class="flex gap-4">
+                <input [(ngModel)]="form.firstName" placeholder="First Name*" class="w-full border-b p-2 outline-none" />
+                <input [(ngModel)]="form.lastName" placeholder="Last Name*" class="w-full border-b p-2 outline-none" />
+            </div>
+
+            <input [(ngModel)]="form.email" placeholder="Email*" class="w-full border-b p-2 outline-none" />
+            <input [(ngModel)]="form.phone" placeholder="Phone" class="w-full border-b p-2 outline-none" />
+            <input [(ngModel)]="form.country" placeholder="Country*" class="w-full border-b p-2 outline-none" />
+
+            <button (click)="submitRequest()" class="w-full bg-black text-white py-3 tracking-[0.2em] mt-6">
+                SEND REQUEST
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="max-w-8xl mx-auto bg-gray-200 px-20 py-20 grid grid-cols-1 lg:grid-cols-4 gap-16">
+
+    <!-- LEFT MENU -->
+    <div class="text-xs tracking-widest uppercase space-y-6 text-gray-500">
+
+        <p class="cursor-pointer" [class.text-black]="activeTab === 'info'" (click)="setTab('info')">
+            ADDITIONAL INFO
+        </p>
+
+        <p class="cursor-pointer" [class.text-black]="activeTab === 'custom'" (click)="setTab('custom')">
+            CUSTOMIZATION
+        </p>
+
+        <p class="cursor-pointer" [class.text-black]="activeTab === 'terms'" (click)="setTab('terms')">
+            TERMS & CONDITIONS
+        </p>
+
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="lg:col-span-3 text-sm text-gray-700 leading-7">
+
+        <!-- ADDITIONAL INFO -->
+        <div *ngIf="activeTab === 'info'">
+
+            <p class="italic">
+                {{product?.description}}
+            </p>
+
+            <p class="italic">
+                {{product?.additionalInfo || 'This is a premium handcrafted product designed with elegance and precision.'}}
+            </p>
+
+            <p class="mt-4 uppercase text-xs tracking-widest text-black">
+                DIMENSIONS
+            </p>
+            <p class="mt-1">
+                {{product.dimensions || 'Width: 30 CM | Depth: 60 CM | Height: 45 CM'}}
+            </p>
+
+            <p class="mt-4 uppercase text-xs tracking-widest text-black">
+                MATERIALS AND FINISHES
+            </p>
+            <p class="mt-1">
+                {{product.materials || 'Brass, Leather, Metal'}}
+            </p>
+
+        </div>
+
+        <!-- CUSTOMIZATION -->
+        <div *ngIf="activeTab === 'custom'">
+
+            <p>
+                This product can be fully customized to meet your design requirements.
+            </p>
+
+            <ul class="mt-4 list-disc ml-5 space-y-2">
+                <li>Choice of materials and finishes</li>
+                <li>Custom dimensions available</li>
+                <li>Color variations on request</li>
+                <li>Tailored design consultation</li>
+            </ul>
+
+        </div>
+
+        <!-- TERMS -->
+        <div *ngIf="activeTab === 'terms'">
+
+            <p>
+                All products are made to order. Production time may vary depending on customization.
+            </p>
+
+            <ul class="mt-4 list-disc ml-5 space-y-2">
+                <li>No returns on customized products</li>
+                <li>Delivery timelines: 4–8 weeks</li>
+                <li>Shipping charges calculated at checkout</li>
+                <li>Warranty available on request</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>

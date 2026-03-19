@@ -1,0 +1,73 @@
+<div class="p-6">
+
+  <h1 class="text-xl font-semibold mb-6">
+    Enquiries / Quotes
+  </h1>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-gray-500">
+    Loading...
+  </div>
+
+  <!-- Table -->
+  <div *ngIf="!loading" class="overflow-auto">
+
+    <table class="w-full border text-sm">
+
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="p-3 border">Name</th>
+          <th class="p-3 border">Email</th>
+          <th class="p-3 border">Phone</th>
+          <th class="p-3 border">Type</th>
+          <th class="p-3 border">Product ID</th>
+          <th class="p-3 border">Date</th>
+          <th class="p-3 border">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let e of enquiries" class="hover:bg-gray-50">
+
+          <td class="p-3 border">
+            {{e.firstName}} {{e.lastName}}
+          </td>
+
+          <td class="p-3 border">
+            {{e.email}}
+          </td>
+
+          <td class="p-3 border">
+            {{e.phone || '-'}}
+          </td>
+
+          <td class="p-3 border">
+            {{e.userType}}
+          </td>
+
+          <td class="p-3 border">
+            {{e.productId}}
+          </td>
+
+          <td class="p-3 border">
+            {{e.createdAt | date:'short'}}
+          </td>
+
+          <td class="p-3 border text-center">
+            <button
+              (click)="deleteEnquiry(e.id)"
+              class="text-red-500 hover:underline">
+              Delete
+            </button>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
